@@ -4,7 +4,7 @@
       <div class="col"></div>
       <div class="col-md-6 bg-white shadow">
         <div class="card bg-warning mt-4">
-          <h4 class="text-white p-3 pt-2 pb-2">To Do App</h4>
+          <h4 class="text-white p-3 pt-2 pb-2">To Do</h4>
         </div>
 
         <div class="shadow">
@@ -21,7 +21,7 @@
               type="button"
               (click)="addTask()"
             >
-              +
+              <i class="fa fa-plus"></i>
             </button>
           </div>
         </div>
@@ -40,13 +40,13 @@
                   data-bs-target="#exampleModal"
                   (click)="call(task)"
                 >
-                  e
+                  <i class="fa fa-pencil"></i>
                 </button>
                 <div
                   class="btn btn-outline-danger col"
                   (click)="deleteTask(task)"
                 >
-                  X
+                  <i class="fa fa-close"></i>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
                     data-bs-dismiss="modal"
                     (click)="editTask()"
                   >
-                    Update
+                    <i class="fa fa-check" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>

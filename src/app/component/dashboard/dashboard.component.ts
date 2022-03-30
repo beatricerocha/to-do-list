@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/model/task';
 import { CrudService } from 'src/app/service/crud.service';
 
@@ -6,7 +7,9 @@ import { CrudService } from 'src/app/service/crud.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
+ 
 export class DashboardComponent implements OnInit {
+  public taskForm!: FormGroup;
 
   taskObj : Task = new Task();
   taskArr : Task[] = [];
@@ -14,7 +17,7 @@ export class DashboardComponent implements OnInit {
   addTaskValue : string = '';
   editTaskValue : string = '';
 
-  constructor(private crudService : CrudService) { }
+  constructor(private fb: FormBuilder, private crudService : CrudService) { }
 
   ngOnInit(): void {
     this.editTaskValue = '';
@@ -22,6 +25,10 @@ export class DashboardComponent implements OnInit {
     this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTask();
+    
+    this.taskForm=this.fb.group({
+      nomeTarefa: ['']
+    });
   }
   getAllTask() {
     this.crudService.getAllTask().subscribe(res => {

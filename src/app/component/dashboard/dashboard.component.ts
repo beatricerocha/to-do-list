@@ -9,26 +9,27 @@ import { CrudService } from 'src/app/service/crud.service';
 })
  
 export class DashboardComponent implements OnInit {
-  public taskForm!: FormGroup;
+  public taskForm = new FormGroup({
+  addTaskValue: new FormControl({value:""}),
+  editTaskValue: new FormControl({value:""}),
+});
 
   taskObj : Task = new Task();
   taskArr : Task[] = [];
 
-  addTaskValue : string = '';
-  editTaskValue : string = '';
-
   constructor(private fb: FormBuilder, private crudService : CrudService) { }
 
   ngOnInit(): void {
-    this.editTaskValue = '';
-    this.addTaskValue = '';
     this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTask();
     
-    this.taskForm=this.fb.group({
-      nomeTarefa: ['']
-    });
+    
+    this.taskForm.setValue({
+      addTaskValue: '',
+      editTaskValue: ''
+
+    })
   }
   getAllTask() {
     this.crudService.getAllTask().subscribe(res => {
@@ -39,17 +40,18 @@ export class DashboardComponent implements OnInit {
   }
 
   addTask() {
-    this.taskObj.nomeTarefa = this.addTaskValue;
+   // console.log(this.taskForm.value);
+    this.taskObj.nomeTarefa = this.taskForm.value.addTaskValue;
     this.crudService.addTask(this.taskObj).subscribe(res => {
       this.ngOnInit();
-      this.addTaskValue = '';
     }, err => {
       alert(err);
     })
   }
 
   editTask() {
-    this.taskObj.nomeTarefa = this.editTaskValue;
+   // console.log(this.taskForm.value);
+   this.taskObj.nomeTarefa = this.taskForm.value.editTaskValue;
     this.crudService.editTask(this.taskObj).subscribe(res => {
       this.ngOnInit();
     }, err=> {
@@ -67,7 +69,7 @@ export class DashboardComponent implements OnInit {
 
   call(etask : Task) {
     this.taskObj = etask;
-    this.editTaskValue = etask.nomeTarefa;
+   // this.editTaskValue = etask.nomeTarefa;
   }
 
 

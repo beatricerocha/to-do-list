@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Task } from '../model/task';
 
 @Injectable({
@@ -14,19 +13,19 @@ export class CrudService {
     this.serviceURL = "https://localhost:7014/api/tarefas"
   }
 
-  addTask(task : Task) : Observable<Task> {
+  addTask(task : Task) {
     return this.http.post<Task>(this.serviceURL,task);
   }
 
-  getAllTask() : Observable<Task[]> {
+  getAllTask(){
     return this.http.get<Task[]>(this.serviceURL);
   }
 
-  deleteTask(task : Task) : Observable<Task> {
+  deleteTask(task : Task){
     return this.http.delete<Task>(this.serviceURL+'/'+task.id);
   }
 
-  editTask(task : Task) : Observable<Task> {
+  editTask(task : Task) {
     return this.http.put<Task>(this.serviceURL+'/'+task.id,task);
   }
 

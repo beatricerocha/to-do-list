@@ -1,0 +1,11 @@
+<form [formGroup]="testForm">
+    <h2 class="text-light">Teste</h2>
+    <div>
+      <label  class="text-light" for="nome">Nome *</label>
+      <input  formControlName= "nomeUsuario" id="nome" type="text" />
+      <label  class="text-light" for="cpf"><strong>CPF *</strong></label>
+      <input formControlName= "cpf" type="text" name="cpf" id="cpf" placeholder="Digite seu CPF">             
+
+    </div>
+    <button (click)="editTeste()">Adicionar</button>
+  </form>
